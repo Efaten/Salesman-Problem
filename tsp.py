@@ -69,8 +69,15 @@ def rot_transform(s):
 
 
 def random_search(s, steps):
-    # TODO
-    pass
+    best = s
+    print(cost(s))
+    ss = s.copy()
+    for step in steps:
+        ss = random_transform(ss)
+        if cost(ss) < cost(best):
+            best = ss
+    print(cost(best))
+    return best 
 
 
 def local_search(s, steps):
@@ -105,7 +112,8 @@ def anneal(s, steps):
 seed(42)
 g = make_random_graph(10)
 print(cost(g))
-g = anneal(g, None)
+# g = anneal(g, None)
+g = random_search(g, range(100000))
 print(cost(g))
 root = Tk()
 w = GUI(root)
