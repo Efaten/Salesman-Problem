@@ -85,6 +85,18 @@ def local_search(s, steps):
     pass
 
 
+def hill_climbing(s, steps):
+    best = s
+    print(cost(s))
+    ss = s.copy()
+    for step in steps:
+        ss = swap_transform(ss)
+        if cost(ss) < cost(best):
+            best = ss
+    print(cost(best))
+    return best
+
+
 def P(delta, T):
     temp = math.exp((-1*delta)/T)
     if random() < temp:
@@ -113,7 +125,8 @@ seed(42)
 g = make_random_graph(10)
 print(cost(g))
 # g = anneal(g, None)
-g = random_search(g, range(100000))
+# g = random_search(g, range(100000))
+g = hill_climbing(g, range(1000))
 print(cost(g))
 root = Tk()
 w = GUI(root)
